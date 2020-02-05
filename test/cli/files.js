@@ -218,7 +218,7 @@ describe('files', () => runOnAndOff((thing) => {
 
     const out = await ipfs('add test/fixtures/less-than-default-max-chunk-size --cid-version=1')
     expect(out)
-      .to.eql('added bafkreie3abdlmy7dtxddm4vkbhd2x2yax5scf4m35eyxf3ywj2uwkjbhgi less-than-default-max-chunk-size\n')
+      .to.eql('added bafybeiaoh5okvpnuhndsz4kgdhulnkm566rz7w7il6r2zm6wxu5f5uqlsu less-than-default-max-chunk-size\n')
   })
 
   it('add with cid-version=1 > default max chunk size', async function () {
@@ -250,7 +250,7 @@ describe('files', () => runOnAndOff((thing) => {
 
     const out = await ipfs('add test/fixtures/less-than-default-max-chunk-size --cid-version=1 --raw-leaves=true')
     expect(out)
-      .to.eql('added bafkreie3abdlmy7dtxddm4vkbhd2x2yax5scf4m35eyxf3ywj2uwkjbhgi less-than-default-max-chunk-size\n')
+      .to.eql('added bafybeiaoh5okvpnuhndsz4kgdhulnkm566rz7w7il6r2zm6wxu5f5uqlsu less-than-default-max-chunk-size\n')
   })
 
   it('add with cid-version=1 and raw-leaves=true > default max chunk size', async function () {
