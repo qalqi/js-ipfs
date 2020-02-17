@@ -21,6 +21,10 @@ function invalidPinTypeErr (type) {
   return errCode(new Error(errMsg), 'ERR_INVALID_PIN_TYPE')
 }
 
+function toKey (cid) {
+  return '/' + bs58.encode(cid.multihash)
+}
+
 const PinTypes = {
   direct: 'direct',
   recursive: 'recursive',
@@ -56,7 +60,7 @@ class PinManager {
   async pinDirectly (cid, options = {}) {
     await this.dag.get(cid, options)
 
-    return this.repo.pins.put(bs58.encode(cid.multihash), cbor.encode({
+    return this.repo.pins.put(toKey(cid), cbor.encode({
       cid: cid.buffer,
       type: PinTypes.direct,
       name: options.name
@@ -83,13 +87,13 @@ class PinManager {
       cid = new CID(cbor.decode(result.value).cid)
     }
 
-    return this.repo.pins.delete(bs58.encode(cid.multihash))
+    return this.repo.pins.delete(toKey(cid))
   }
 
   async pinRecursively (cid, options = {}) {
     await this.fetchCompleteDag(cid, options)
 
-    await this.repo.pins.put(bs58.encode(cid.multihash), cbor.encode({
+    await this.repo.pins.put(toKey(cid), cbor.encode({
       cid: cid.buffer,
       type: PinTypes.recursive,
       name: options.name
@@ -161,7 +165,7 @@ class PinManager {
 
     if (recursive || direct || all) {
       const result = await first(this.repo.pins.query({
-        prefix: bs58.encode(cid.multihash),
+        prefix: toKey(cid),
         filters: [entry => {
           const pin = cbor.decode(entry.value)
 
