@@ -4,6 +4,7 @@
 
 const { expect } = require('interface-ipfs-core/src/utils/mocha')
 const last = require('it-last')
+const drain = require('it-drain')
 const factory = require('../utils/factory')
 const pEvent = require('p-event')
 
@@ -230,8 +231,8 @@ describe.skip('gc', function () {
       const cid2 = (await ipfs.block.put(Buffer.from('block to pin rm 2'), null)).cid
 
       // Pin blocks
-      await last(ipfs.pin.add(cid1))
-      await last(ipfs.pin.add(cid2))
+      await drain(ipfs.pin.add(cid1))
+      await drain(ipfs.pin.add(cid2))
 
       // Unpin first block
       // Note: pin rm will take a read lock

@@ -14,19 +14,17 @@ module.exports = ({ pinManager, gcLock, dag }) => {
     const pinAdd = async function * () {
       // verify that each hash can be pinned
       for (const cid of cids) {
-        const isPinned = await pinManager.isPinnedWithType(cid, [PinTypes.recursive, PinTypes.direct])
-        const pinned = isPinned.pinned
+        const { reason } = await pinManager.isPinnedWithType(cid, [PinTypes.recursive, PinTypes.direct])
 
-        if (pinned) {
-          throw new Error(`${cid} already pinned with type ${isPinned.reason}`)
+        if (reason === 'recursive' && !recursive) {
+          // only disallow trying to override recursive pins
+          throw new Error(`${cid} already pinned recursively`)
         }
 
-        if (!pinned) {
-          if (recursive) {
-            await pinManager.pinRecursively(cid)
-          } else {
-            await pinManager.pinDirectly(cid)
-          }
+        if (recursive) {
+          await pinManager.pinRecursively(cid)
+        } else {
+          await pinManager.pinDirectly(cid)
         }
 
         yield { cid }
