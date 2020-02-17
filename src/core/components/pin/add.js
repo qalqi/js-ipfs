@@ -17,19 +17,19 @@ module.exports = ({ pinManager, gcLock, dag }) => {
         const isPinned = await pinManager.isPinnedWithType(cid, [PinTypes.recursive, PinTypes.direct])
         const pinned = isPinned.pinned
 
-        if (pinned) {
+        /* if (pinned) {
           throw new Error(`${cid} already pinned with type ${isPinned.reason}`)
-        }
+        } */
 
-        if (recursive) {
-          await pinManager.pinRecursively(cid)
-        } else {
-          await pinManager.pinDirectly(cid)
+        if (!pinned) {
+          if (recursive) {
+            await pinManager.pinRecursively(cid)
+          } else {
+            await pinManager.pinDirectly(cid)
+          }
         }
 
         yield { cid }
-
-        continue
       }
     }
 

@@ -133,6 +133,7 @@ describe('dag', () => runOnAndOff.off((thing) => {
       const cid = (await ipfs('dag put --pin "{"hello":"world"}"')).trim()
 
       const out = await ipfs('pin ls')
+
       expect(out).to.include(cid)
     })
 

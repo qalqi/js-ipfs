@@ -5,7 +5,7 @@ const { expect } = require('interface-ipfs-core/src/utils/mocha')
 const runOnAndOff = require('../utils/on-and-off')
 const isIPFS = require('is-ipfs')
 
-describe('dns', () => runOnAndOff((thing) => {
+describe.skip('dns', () => runOnAndOff((thing) => {
   let ipfs
 
   before(function () {

@@ -26,10 +26,9 @@ module.exports = {
     resolve((async () => {
       const type = recursive ? 'recursive' : 'direct'
       const ipfs = await getIpfs()
-      const results = await ipfs.pin.add(ipfsPath, { recursive })
-      results.forEach((res) => {
+      for await (const res of ipfs.pin.add(ipfsPath, { recursive })) {
         print(`pinned ${cidToString(res.cid, { base: cidBase })} ${type}ly`)
-      })
+      }
     })())
   }
 }

@@ -130,29 +130,23 @@ class PinManager {
     }
   }
 
-  * indirectKeys ({ preload }) {
-    const self = this
+  async * indirectKeys ({ preload }) {
+    for await (const { cid } of this.recursiveKeys()) {
+      for await (const childCid of this._walkDag(cid, { preload })) {
+        // recursive pins override indirect pins
+        const types = [
+          PinTypes.recursive
+        ]
 
-    async function * findChildren (recursiveKeys) {
-      for await (const { cid } of recursiveKeys) {
-        for await (const childCid of self._walkDag(cid, { preload })) {
-          // recursive pins override indirect pins
-          const types = [
-            PinTypes.recursive
-          ]
+        const result = await this.isPinnedWithType(childCid, types)
 
-          const result = await self.isPinnedWithType(childCid, types)
-
-          if (result.pinned) {
-            continue
-          }
-
-          yield childCid
+        if (result.pinned) {
+          continue
         }
+
+        yield childCid
       }
     }
-
-    yield * findChildren(this.recursiveKeys())
   }
 
   async isPinnedWithType (cid, types) {

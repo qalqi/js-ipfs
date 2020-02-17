@@ -2,6 +2,7 @@
 
 const multicodec = require('multicodec')
 const nameToCodec = name => multicodec[name.toUpperCase().replace(/-/g, '_')]
+const last = require('it-last')
 
 module.exports = ({ ipld, pin, gcLock, preload }) => {
   return async function put (dagNode, options) {
@@ -51,9 +52,9 @@ module.exports = ({ ipld, pin, gcLock, preload }) => {
       })
 
       if (options.pin) {
-        await pin.add(cid, {
+        await last(pin.add(cid, {
           lock: false
-        })
+        }))
       }
 
       if (options.preload !== false) {

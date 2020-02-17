@@ -66,9 +66,7 @@ describe('interface-ipfs-core tests', function () {
 
   tests.object(commonFactory)
 
-  tests.pin(commonFactory, {
-    only: true
-  })
+  tests.pin(commonFactory)
 
   tests.ping(commonFactory)
 
