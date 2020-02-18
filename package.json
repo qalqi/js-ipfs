@@ -1,6 +1,6 @@
 {
   "name": "ipfs",
-  "version": "0.40.0",
+  "version": "0.40.2",
   "description": "JavaScript implementation of the IPFS specification",
   "keywords": [
     "IPFS"
@@ -15,7 +15,20 @@
   ],
   "main": "src/core/index.js",
   "browser": {
-    "./src/core/components/init-assets.js": false,
+    "./src/core/components/init-assets.js": "./src/core/components/init-rn.js",
+    "./src/core/runtime/add-from-fs-nodejs.js": "./src/core/runtime/add-from-fs-browser.js",
+    "./src/core/runtime/config-nodejs.js": "./src/core/runtime/config-browser.js",
+    "./src/core/runtime/dns-nodejs.js": "./src/core/runtime/dns-browser.js",
+    "./src/core/runtime/libp2p-nodejs.js": "./src/core/runtime/libp2p-browser.js",
+    "./src/core/runtime/libp2p-pubsub-routers-nodejs.js": "./src/core/runtime/libp2p-pubsub-routers-browser.js",
+    "./src/core/runtime/preload-nodejs.js": "./src/core/runtime/preload-browser.js",
+    "./src/core/runtime/repo-nodejs.js": "./src/core/runtime/repo-browser.js",
+    "./src/core/runtime/ipld-nodejs.js": "./src/core/runtime/ipld-browser.js",
+    "./test/utils/create-repo-nodejs.js": "./test/utils/create-repo-browser.js",
+    "stream": "readable-stream"
+  },
+  "react-native": {
+    "./src/core/components/init-assets.js": "./src/core/components/init-rn.js",
     "./src/core/runtime/add-from-fs-nodejs.js": "./src/core/runtime/add-from-fs-browser.js",
     "./src/core/runtime/config-nodejs.js": "./src/core/runtime/config-browser.js",
     "./src/core/runtime/dns-nodejs.js": "./src/core/runtime/dns-browser.js",
