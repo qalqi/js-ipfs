@@ -1,6 +1,6 @@
 {
   "name": "ipfs",
-  "version": "0.40.2",
+  "version": "0.40.3",
   "description": "JavaScript implementation of the IPFS specification",
   "keywords": [
     "IPFS"
@@ -143,7 +143,7 @@
     "kind-of": "^6.0.2",
     "ky": "^0.15.0",
     "ky-universal": "~0.3.0",
-    "libp2p": "^0.27.2",
+    "libp2p": "github:qalqi/js-libp2p#reactnativebranch",
     "libp2p-bootstrap": "~0.9.3",
     "libp2p-crypto": "^0.16.2",
     "libp2p-delegated-content-routing": "^0.3.1",
@@ -158,7 +158,7 @@
     "libp2p-tcp": "^0.13.0",
     "libp2p-webrtc-star": "~0.16.0",
     "libp2p-websocket-star-multi": "~0.4.3",
-    "libp2p-websockets": "~0.13.3",
+    "libp2p-websockets": "github:qalqi/js-libp2p-websockets#0.12.x",
     "lodash.flatten": "^4.4.0",
     "mafmt": "^6.0.10",
     "merge-options": "^2.0.0",
